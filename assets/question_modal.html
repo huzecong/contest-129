@@ -1,0 +1,51 @@
+<div class="modal fade" id="question-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: 19px;" class="modal-title" id="modal-label">
+                    问题分类：
+                    <div style="display: inline" id="question-category"></div>
+                    <div class="pull-right">分值：
+                        <div class="question-points">1234567890</div>
+                    </div>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="font-weight: bold; margin-left: 35px; margin-right: 35px">题目描述
+                    <div class="pull-right">出题人：
+                        <div id="question-setter" style="display: inline;"></div>
+                    </div>
+                </div>
+                <div id="question-text" class="question-text"></div>
+                <div class="collapse" id="question-explanation">
+                    <hr style="margin-top: 50px; margin-bottom: 50px;">
+                    <div style="font-weight: bold; margin-left: 35px">题目解答</div>
+                    <div id="question-answer" class="question-text"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-item-button" class="btn btn-info pull-left">
+                    <span class="glyphicon glyphicon-briefcase"></span>
+
+                    <div>使用道具</div>
+                </button>
+                <button id="modal-show-button" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-search"></span>
+
+                    <div>查看解答</div>
+                </button>
+                <button id="modal-no-button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+
+                    <div>失败</div>
+                </button>
+                <button id="modal-yes-button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+
+                    <div>成功</div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>129知识竞赛</title>
+    <meta name="generator" content="Bootply"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- stylesheets -->
+    <link href="assets/animate/css/animate.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+    <link href="assets/eden.css" rel="stylesheet">
+    <!-- script references -->
+    <script src="assets/jquery/jquery.js"></script>
+    <script src="assets/jquery/jquery.history.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/random.js"></script>
+    <script src="assets/scripts.js"></script>
+</head>
+
+<body>
+<!-- header -->
+<div id="top-nav" class="navbar navbar-default navbar-static-top affix">
+    <div class="container-fluid">
+        <div class="nav navbar-nav navbar-left">
+            <a class="fake-link-scroll navbar-brand">129知识竞赛</a>
+        </div>
+    </div>
+</div>
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container-fluid main">
+    <div class="collapse" id="role-dice-panel">
+        <a class="fake-link">
+            <strong><i class="glyphicon glyphicon-stats"></i>　掷骰子前进!</strong>
+        </a>
+        <hr>
+        <div class="form-group" style="text-align: center;">
+            <label class="control-label">单击以改变骰面</label>
+
+            <div>
+                <img src="assets/image/dice/dice-1.png" class="dice-image" id="dice-1">
+                <img src="assets/image/dice/dice-1.png" class="dice-image" id="dice-2">
+                <script>
+                    function extractNumber(src) {
+                        return parseInt(src.substr(src.indexOf("-") + 1).substr(0, 1), 10);
+                    }
+
+                    var clickDice = function () {
+                        var number = extractNumber($(this).attr("src"));
+                        number = number % 6 + 1;
+                        $(this).attr("src", "assets/image/dice/dice-" + number.toString() + ".png");
+                    };
+                    $(".dice-image").click(clickDice);
+                </script>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <button id="dice-item-button" style="margin-right: 30px" class="btn btn-info">
+                <span class="glyphicon glyphicon-briefcase"></span>
+
+                <div>使用道具</div>
+            </button>
+            <button id="dice-random-button" style="margin-right: 30px" class="btn btn-warning">
+                <span class="glyphicon glyphicon-refresh"></span>
+
+                <div>随机掷骰</div>
+            </button>
+            <button class="btn btn-primary" data-toggle="collapse"
+                    data-target="#role-dice-panel" id="dice-roll-confirm-button">
+                <span class="glyphicon glyphicon-ok"></span>
+
+                <div>确定</div>
+            </button>
+            <script>
+                $("#dice-random-button").click(function () {
+                    $(".btn").attr("disabled", "disabled");
+                    $(".dice-image").off("click").animate({
+                        opacity: 0.85
+                    }, 50);
+
+                    var roll = function (remain) {
+                        $(".dice-image").animate({
+                            opacity: 1.0
+                        }, 50);
+                        if (remain == 0) {
+                            setTimeout(function () {
+                                animate($(".dice-image"), "flash");
+                            }, 300);
+                            setTimeout(function () {
+                                $(".btn").removeAttr("disabled");
+                                $(".dice-image").click(clickDice);
+                                $("#dice-roll-confirm-button").click();
+                            }, 1500);
+                            return;
+                        }
+                        var dice1 = random(1, 6);
+                        var dice2 = random(1, 6);
+                        $("#dice-1").attr("src", "assets/image/dice/dice-" + dice1.toString() + ".png");
+                        $("#dice-2").attr("src", "assets/image/dice/dice-" + dice2.toString() + ".png");
+                        setTimeout(function () {
+                            $(".dice-image").animate({
+                                opacity: 0.85
+                            }, 50);
+                            roll(remain - 1);
+                        }, remain <= 5 ? 500
+                                : remain <= 10 ? 200
+                                : 100);
+                    };
+
+                    roll(30);
+                });
+
+                $("#dice-roll-confirm-button").click(function () {
+                    var dice1 = extractNumber($("#dice-1").attr("src"));
+                    var dice2 = extractNumber($("#dice-2").attr("src"));
+                    var party = game.players[game.state.current_player].party;
+                    if (party != 0) {
+                        dice1 = 0;
+                        dice2 = party;
+                    }
+                    setTimeout(function () {
+                        makeMove(game.state.current_player, dice1 + dice2);
+                    }, 400);
+                });
+            </script>
+        </div>
+    </div>
+    <div class="row">
+        <div id="left-column">
+            <!-- Left column -->
+            <a class="fake-link">
+                <strong><i class="glyphicon glyphicon-stats"></i>　得分排行榜</strong>
+            </a>
+            <ul class="nav nav-stacked">
+                <hr>
+                <ul class="nav nav-stacked nav-pills" id="score-ranklist">
+                </ul>
+            </ul>
+            <div style="text-align: center" data-toggle="collapse" data-target="#role-dice-panel">
+                <button class="btn btn-primary" style="font-size: 20px" id="start-round-button">开始回合!</button>
+                <script>
+                    $("#start-round-button").click(function () {
+                        $(this).attr("disabled", "disabled");
+                        var party = game.players[game.state.current_player].party;
+                        if (party != 0) {
+                            $("#dice-roll-button").attr("disabled", "disabled");
+                        } else {
+                            $("#dice-roll-button").removeAttr("disabled");
+                        }
+                        startTurn(game.state.current_player);
+                    });
+                </script>
+            </div>
+        </div>
+
+        <div class="container-fluid" id="main-page">
+            <a class="fake-link">
+                <strong><i class="fa fa-map"></i>　游戏地图</strong>
+                <a onclick="javascript:enterFastAnswerMode()">
+                    <div class="pull-right" id="total-questions">累计答题：
+                        <div style="display: inline;">0</div>
+                        道
+                    </div>
+                </a>
+            </a>
+            <hr>
+            <img src="assets/image/map.jpg" id="map">
+        </div>
+    </div>
+</div>
+<!-- /Main -->
+
+<!-- Modal -->
+
+<!-- /Modal -->
+
+</body>
+
+</html>

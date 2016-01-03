@@ -1,0 +1,291 @@
+hr {
+    -webkit-margin-before: 10px;
+    -webkit-margin-after: 10px;
+}
+
+body {
+    min-width: 480px;
+}
+
+.navbar-static-top {
+    margin-bottom: 20px;
+}
+
+i {
+    font-size: 16px;
+}
+
+.nav > li > a {
+    color: #2c3e50;
+}
+
+footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #efefef;
+}
+
+/* count indicator near icons */
+.nav > li .count {
+    position: absolute;
+    bottom: 12px;
+    right: 6px;
+    font-size: 9px;
+    background: rgba(51, 200, 51, 0.55);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1em;
+    padding: 2px 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.navbar {
+    width: 100%;
+    z-index: 1000;
+}
+
+#left-column {
+}
+
+#main-page {
+    overflow: hidden;
+}
+
+.container-fluid {
+    max-width: 1200px;
+}
+
+/* align badges with left-column items */
+a > span.badge-info {
+    vertical-align: top;
+}
+
+/* align glyphicons with text */
+.glyphicon {
+    vertical-align: text-top;
+}
+
+/* add spaces between control-groups, ignore first and last (buttons) */
+.form > .control-group:nth-of-type(n+2):nth-last-of-type(n+2) {
+    padding-top: 10px;
+}
+
+/*
+    put modal windows in center
+    for readability concerns, only apply to large screens
+*/
+@media screen and (min-width: 768px) {
+    .main {
+        padding-top: 70px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .main {
+        padding-top: 80px;
+    }
+}
+
+/* add hand-shaped cursors for links without href */
+.fake-link {
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.fake-link-scroll {
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+#left-column {
+    position: fixed;
+    width: 260px !important;
+    float: left;
+}
+
+/* rank list view */
+.left-column-item {
+    cursor: pointer;
+}
+
+.left-column-item.active {
+    border: 3px solid #18bc9c;
+    border-radius: 15px;
+    margin: -5px;
+    padding: 5px;
+}
+
+.ranklist.rank {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 25px;
+    color: #000;
+    line-height: 50px;
+    text-align: center;
+    background-color: #f1f1f1;
+    float: left;
+}
+
+.left-column-item.active .ranklist.rank {
+    background-color: #18bc9c;
+}
+
+.ranklist.information {
+    display: block;
+    padding-left: 70px;
+}
+
+.ranklist.name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.ranklist.score-text {
+    float: right;
+    margin-top: 30px;
+    line-height: 50%;
+}
+
+.ranklist.score {
+    float: right;
+    margin-top: -15px;
+    font-size: 55px;
+}
+
+.ranklist.place {
+    margin-top: 20px;
+    display: inline-block;
+    line-height: 50%;
+}
+
+img.player-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+img.ranklist.player-avatar {
+    margin-top: 10px;
+}
+
+/* player map widget */
+.item-container {
+    float: left;
+    position: fixed;
+}
+
+.mapwidget {
+    z-index: 1;
+    position: relative;
+    -webkit-box-shadow: 0 3px 5px #888;
+    -moz-box-shadow: 0 3px 5px #888;
+    box-shadow: 0 3px 5px #888;
+    border: 2px solid #444;
+}
+
+/* map view */
+#main-page {
+    margin-left: 250px;
+    padding-left: 30px;
+}
+
+#map {
+    position: fixed;
+    z-index: -1;
+    object-fit: contain;
+}
+
+/* role dice panel */
+img.dice-image {
+    width: 120px;
+    height: 120px;
+    margin: 10px 30px;
+}
+
+/* question modal */
+.modal {
+    margin-top: 20px;
+}
+
+.modal-dialog-lg {
+    margin-left: 15%;
+    width: 70%;
+}
+
+.modal-header .question-points {
+    font-size: 40px;
+    display: inline;
+}
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+br {
+    text-indent: 2em each-line;
+}
+
+.modal .question-text {
+    text-indent: 2em;
+    text-align: left;
+    font-size: 25px;
+    width: calc(80% / 0.9);
+    padding-left: 10%;
+}
+
+.modal .question-choices {
+    text-align: center;
+}
+
+.modal .question-choice {
+    font-size: 25px;
+    margin: 10px;
+}
+
+.modal-footer .btn {
+    font-size: 18px;
+}
+
+/* item card */
+.item-card {
+    border: 3px solid #222;
+    border-radius: 10px;
+    width: 400px;
+    height: 600px;
+    margin-left: 100px;
+}
+
+.item-card-title {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.item-card-image {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+    margin-left: 25px;
+    border-radius: 10px;
+}
+
+.item-card-description {
+    text-indent: 2em;
+    font-size: 20px;
+    margin: 0 25px;
+}
+
+.item-card-quote {
+    font-family: "STLiti";
+    text-align: center;
+    font-size: 20px;
+    margin: 20px 25px;
+}
